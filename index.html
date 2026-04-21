@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fadhil Nadhif Muharam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f2ea;
+    --bg-soft: #efe9dd;
+    --paper: #fbf8f1;
+    --ink: #1a1916;
+    --ink-soft: #3d3a35;
+    --ink-mute: #6b655c;
+    --rule: #d9d1bf;
+    --rule-soft: #e6dfce;
+    --accent: oklch(0.45 0.12 25);      /* muted burgundy */
+    --accent-soft: oklch(0.45 0.12 25 / 0.08);
+    --serif: "Source Serif 4", "Iowan Old Style", "Palatino", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.55;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); transition: border-color .15s, color .15s; }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  a.plain { border: none; }
+  a.plain:hover { color: var(--accent); }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 18px 40px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: 0.01em;
+    border: none;
+  }
+  .brand em { font-style: italic; color: var(--ink-mute); font-weight: 400; }
+  .nav-links {
+    display: flex; gap: 28px;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .nav-links a {
+    border: none;
+    padding-bottom: 2px;
+    position: relative;
+    color: var(--ink-soft);
+  }
+  .nav-links a::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: -2px;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .2s ease;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-links a.active::after { transform: scaleX(1); }
+
+  /* ---------- LAYOUT ---------- */
+  main { max-width: 1120px; margin: 0 auto; padding: 0 40px 120px; }
+
+  section { scroll-margin-top: 80px; padding: 80px 0; border-top: 1px solid var(--rule-soft); }
+  section:first-of-type { border-top: none; padding-top: 72px; }
+
+  .section-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: ""; width: 22px; height: 1px; background: var(--accent);
+  }
+
+  h1, h2, h3 { font-weight: 400; letter-spacing: -0.01em; margin: 0; }
+  h1 { font-size: clamp(44px, 6vw, 72px); line-height: 1.02; letter-spacing: -0.025em; }
+  h2 { font-size: clamp(28px, 3vw, 36px); line-height: 1.15; letter-spacing: -0.02em; }
+  h3 { font-size: 22px; line-height: 1.3; font-weight: 500; }
+  p { margin: 0 0 18px; }
+  p.lede { font-size: 20px; line-height: 1.55; color: var(--ink-soft); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 72px;
+    align-items: start;
+  }
+  .hero-left h1 { margin-bottom: 28px; }
+  .hero-left h1 .amp { font-style: italic; color: var(--accent); font-weight: 300; }
+  .hero-kicker {
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 24px;
+  }
+  .hero-kicker .dot { color: var(--accent); margin: 0 10px; }
+
+  .hero-bio { font-size: 19px; line-height: 1.6; color: var(--ink-soft); max-width: 62ch; }
+  .hero-bio strong { font-weight: 600; color: var(--ink); }
+
+  .portrait-card {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 12px;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02), 0 18px 40px -28px rgba(40,30,20,0.25);
+    transform: rotate(0.4deg);
+  }
+  .portrait {
+    width: 100%; aspect-ratio: 3 / 4;
+    background-image: url('assets/fadhil.jpeg');
+    background-size: cover;
+    background-position: center 20%;
+    filter: saturate(0.92) contrast(1.02);
+  }
+  .portrait-caption {
+    font-family: var(--sans);
+    font-size: 11px; color: var(--ink-mute);
+    margin-top: 10px; text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- INFO ROW ---------- */
+  .info-row {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .info-label {
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 10px;
+  }
+  .info-body { font-size: 16px; line-height: 1.5; color: var(--ink); }
+  .info-body .muted { color: var(--ink-mute); font-size: 14px; display: block; margin-top: 2px; font-style: italic; }
+
+  /* ---------- RESEARCH ---------- */
+  .research-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 40px; gap: 24px; flex-wrap: wrap; }
+  .research-header p { color: var(--ink-mute); max-width: 44ch; margin: 0; font-size: 16px; }
+
+  .paper-group { margin-top: 48px; }
+  .paper-group:first-child { margin-top: 0; }
+  .group-title {
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 0;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .group-title .count {
+    font-family: var(--serif); font-style: italic; font-size: 14px;
+    font-weight: 400; color: var(--ink-mute); letter-spacing: 0;
+  }
+
+  .paper {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .paper:last-child { border-bottom: none; }
+  .paper-head { }
+  .paper-coauthors {
+    font-family: var(--sans); font-size: 13px; color: var(--ink-mute);
+    margin-top: 10px; line-height: 1.45;
+  }
+  .paper-coauthors a { border: none; color: var(--ink-soft); }
+  .paper-coauthors a:hover { color: var(--accent); }
+
+  .paper-meta {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 14px;
+  }
+  .chip {
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--ink-soft);
+    background: var(--paper);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .chip:hover { border-color: var(--ink); color: var(--ink); }
+  .chip.accent {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .chip .sep { opacity: 0.5; margin: 0 6px; }
+
+  .paper-right { }
+  .abstract {
+    font-size: 15.5px; line-height: 1.65;
+    color: var(--ink-soft);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .35s ease, margin .35s ease, opacity .25s ease .05s;
+    opacity: 0;
+  }
+  .paper.open .abstract { max-height: 800px; opacity: 1; margin-top: 4px; }
+
+  .toggle {
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 500;
+    color: var(--ink-mute);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    letter-spacing: 0.04em;
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 12px;
+  }
+  .toggle:hover { color: var(--accent); }
+  .toggle .arrow { display: inline-block; transition: transform .2s; font-size: 10px; }
+  .paper.open .toggle .arrow { transform: rotate(90deg); }
+
+  .presentations {
+    margin-top: 16px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--ink-mute);
+    line-height: 1.6;
+  }
+  .presentations strong { font-weight: 600; color: var(--ink-soft); letter-spacing: 0.04em; text-transform: uppercase; font-size: 11px; display: block; margin-bottom: 4px; }
+
+  .venue {
+    font-family: var(--sans); font-size: 13px;
+    color: var(--accent); font-weight: 500;
+    margin-top: 6px;
+  }
+  .venue .year { color: var(--ink-mute); font-weight: 400; }
+
+  /* ---------- CV ---------- */
+  .cv-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 4px; top: 8px; bottom: 8px;
+    width: 1px; background: var(--rule);
+  }
+  .t-item { position: relative; padding-bottom: 28px; }
+  .t-item::before {
+    content: ""; position: absolute; left: -24px; top: 10px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--bg); border: 1.5px solid var(--ink-mute);
+  }
+  .t-item.current::before { background: var(--accent); border-color: var(--accent); }
+  .t-year {
+    font-family: var(--sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.08em;
+    color: var(--ink-mute); text-transform: uppercase;
+  }
+  .t-title { font-size: 17px; font-weight: 500; margin-top: 2px; }
+  .t-sub { font-size: 14px; color: var(--ink-mute); font-style: italic; margin-top: 1px; }
+
+  .cv-right { }
+  .download-card {
+    border: 1px solid var(--rule);
+    padding: 28px;
+    background: var(--paper);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .download-card .label { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
+  .download-card .fname { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); }
+  .dl-btn {
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    background: var(--ink); color: var(--bg);
+    padding: 12px 18px; border: none;
+    text-align: center; cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background .15s;
+    display: inline-flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .dl-btn:hover { background: var(--accent); color: var(--bg); border: none; }
+
+  .facts { margin-top: 32px; }
+  .fact-row {
+    display: grid; grid-template-columns: 110px 1fr;
+    padding: 14px 0; border-bottom: 1px solid var(--rule-soft);
+    font-size: 15px;
+  }
+  .fact-row:last-child { border-bottom: none; }
+  .fact-row .k { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); padding-top: 3px; }
+
+  /* ---------- FOOTER / CONTACT ---------- */
+  .footer-contact {
+    padding: 96px 0 64px;
+    border-top: 1px solid var(--rule-soft);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: end;
+  }
+  .footer-contact h2 { max-width: 14ch; }
+  .footer-contact .email {
+    display: inline-block; margin-top: 20px;
+    font-size: 22px; font-style: italic; color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .socials { display: flex; gap: 10px; }
+  .socials a {
+    font-family: var(--sans); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border: 1px solid var(--rule);
+    padding: 10px 16px;
+    color: var(--ink-soft);
+    transition: all .15s;
+  }
+  .socials a:hover { border-color: var(--ink); color: var(--ink); background: var(--paper); }
+
+  .colophon {
+    margin-top: 80px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule-soft);
+    display: flex; justify-content: space-between;
+    font-family: var(--sans); font-size: 12px;
+    color: var(--ink-mute); letter-spacing: 0.02em;
+  }
+
+  /* ---------- TWEAKS PANEL ---------- */
+  #tweaks {
+    position: fixed; bottom: 24px; right: 24px;
+    width: 280px; z-index: 100;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 0 20px 48px -20px rgba(20,15,5,0.25);
+    padding: 18px; font-family: var(--sans);
+    font-size: 13px; color: var(--ink);
+    display: none;
+  }
+  #tweaks.open { display: block; }
+  #tweaks h4 {
+    margin: 0 0 14px; font-family: var(--sans);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-mute);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  #tweaks .row { margin-bottom: 14px; }
+  #tweaks .row:last-child { margin-bottom: 0; }
+  #tweaks label { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 6px; }
+  #tweaks .swatches { display: flex; gap: 6px; }
+  #tweaks .sw {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1px solid var(--rule); cursor: pointer;
+    position: relative;
+  }
+  #tweaks .sw.on { outline: 2px solid var(--ink); outline-offset: 2px; }
+  #tweaks .pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  #tweaks .pill {
+    padding: 6px 10px; border: 1px solid var(--rule);
+    background: transparent; cursor: pointer;
+    font-family: var(--sans); font-size: 11px;
+    letter-spacing: 0.04em; color: var(--ink-soft);
+  }
+  #tweaks .pill.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .portrait-card { max-width: 260px; }
+    .info-row { grid-template-columns: 1fr; gap: 24px; }
+    .paper { grid-template-columns: 1fr; gap: 16px; }
+    .cv-grid { grid-template-columns: 1fr; gap: 48px; }
+    .footer-contact { grid-template-columns: 1fr; align-items: start; }
+    .nav-inner { padding: 14px 24px; }
+    main { padding: 0 24px 80px; }
+    .nav-links { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">Fadhil Nadhif <em>Muharam</em></a>
+    <div class="nav-links">
+      <a href="#about" class="active" data-link>About</a>
+      <a href="#research" data-link>Research</a>
+      <a href="#cv" data-link>CV</a>
+      <a href="#contact" data-link>Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+
+<!-- ABOUT / HERO -->
+<section id="about">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-kicker">
+        PhD Candidate <span class="dot">·</span> Stockholm School of Economics <span class="dot">·</span> Visiting, UBC
+      </div>
+      <h1>Fadhil Nadhif<br>Muharam</h1>
+      <p class="hero-bio">
+        I am a PhD student in economics at the <a href="https://www.hhs.se/en/persons/m/nadhif-muharam-fadhil/" target="_blank" rel="noopener">Stockholm School of Economics</a> and an affiliated researcher at the House of Sustainable Society (formerly Misum). From January to June 2026, I am a Visiting Research Student at the Vancouver School of Economics, <a href="#" class="plain">University of British Columbia</a>, hosted by Prof. Siwan Anderson.
+      </p>
+      <p class="hero-bio">
+        My research lies at the intersection of <em>development economics</em>, the <em>economics of gender</em>, and the <em>economics of the family</em>. I study how social norms shape children's welfare in developing countries — specifically, the determinants of harmful norms and their impact on the accumulation of human capital.
+      </p>
+    </div>
+    <div>
+      <div class="portrait-card">
+        <div class="portrait"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-row">
+    <div>
+      <div class="info-label">Fields</div>
+      <div class="info-body">
+        Development Economics<br>
+        Economics of Gender<br>
+        Economics of the Family
+      </div>
+    </div>
+    <div>
+      <div class="info-label">Current Position</div>
+      <div class="info-body">
+        Visiting Research Student<br>
+        Vancouver School of Economics, UBC
+        <span class="muted">January — June 2026</span>
+      </div>
+    </div>
+    <div>
+      <div class="info-label">Home Institution</div>
+      <div class="info-body">
+        Stockholm School of Economics
+        <span class="muted">Department of Economics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-label">Research</div>
+
+  <!-- WORKING PAPER -->
+  <div class="paper-group">
+    <div class="group-title">Working Paper <span class="count">i.</span></div>
+
+    <article class="paper" data-paper>
+      <div class="paper-head">
+        <h3>Age of Consent and Child Protection in Sub-Saharan Africa</h3>
+        <div class="paper-coauthors">Solo-authored · <em>Draft available upon request</em></div>
+        <div class="paper-meta">
+          <span class="chip">Development</span>
+          <span class="chip">Gender</span>
+          <span class="chip">Law &amp; Policy</span>
+        </div>
+        <button class="toggle"><span class="arrow">›</span> Read abstract</button>
+      </div>
+      <div class="paper-right">
+        <div class="abstract">
+          I study the impacts of raising the age of sexual consent, a legal framework designed to safeguard children from the risks associated with early sexual activity and exploitation. Using data from 20 Sub-Saharan African countries and an event study design, I find that increasing the age of consent significantly reduces sexual activity, pregnancy, and marriage among girls under the legal threshold, with effects persisting beyond the age of consent. These reductions are driven by behavioral adaptations, including temporary increases in contraceptive use, followed by sustained declines in sexual activity and a decrease in out-of-wedlock pregnancies linked to reductions in underage marriage. For boys, the reform leads to a reduction in sexual activity, but the effect is not persistent as they age. Notably, the law does not affect the rates of child sexual abuse, likely due to imperfect enforcement. I argue that the gendered differences in the persistence of effects, along with heterogeneous responses to the laws, point to the role of legislation in reinforcing social norms surrounding children's sexuality.
+          <div class="presentations">
+            <strong>Presentations</strong>
+            SSE PhD Workshop (2024) · SUDSWEC, Stockholm University (2024) · ASWEDE Conference (2024) · NPPS, University of Copenhagen (2024, poster) · Université Libre de Bruxelles (2025) · University of Essex PhD Conference (2025) · Royal Swedish Academy of Sciences (2025, poster) · OsloMet (2025) · SSE Brown Bag (2025) · UBC Dev/PE Brown Bag (2026)
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- WORK IN PROGRESS -->
+  <div class="paper-group">
+    <div class="group-title">Work in Progress <span class="count">ii.</span></div>
+
+    <article class="paper" data-paper>
+      <div class="paper-head">
+        <h3>Broadcasting Norms: State Media, Intrahousehold Dynamics, and Child Welfare</h3>
+        <div class="paper-coauthors">with <a href="https://jesitawida.weebly.com/" target="_blank" rel="noopener">Jesita Ajani</a></div>
+        <div class="paper-meta">
+          <span class="chip">Development</span>
+          <span class="chip">Gender</span>
+          <span class="chip">Media</span>
+          <span class="chip">Indonesia</span>
+        </div>
+        <button class="toggle"><span class="arrow">›</span> Read abstract</button>
+      </div>
+      <div class="paper-right">
+        <div class="abstract">
+          We examine how state-controlled media shapes gender norms by exploiting variation in exposure to Indonesia's TVRI during the New Order regime (1967–1998). The regime promoted State Ibuism, an ideology positioning women primarily as wives and mothers. Leveraging the staggered rollout of transmitters and terrain-driven signal variation, we find that television exposure significantly reduced female labor force participation while increasing the likelihood of women reporting housework as their primary activity. This decline reflects labor market withdrawal rather than sectoral upgrading. In contrast, male employment exhibited structural transformation from agriculture to modern sectors without significant exit. Despite potential income reductions from maternal market exit, child welfare improved: higher television exposure increased school enrollment, reduced child labor, and improved early-childhood health outcomes. Our findings demonstrate how authoritarian regimes use mass media as instruments of social engineering to reshape gender relations, with lasting effects for children's welfare.
+          <div class="presentations">
+            <strong>Presentations &amp; Scheduled</strong>
+            SSE Speed Brown Bag (2025) · University of Zurich (2025) · ASWEDE Conference (2025) · UBC Dev/PE Brown Bag (2026) · Southeast Asia Centre PhD Workshop, LSE (scheduled) · Asian Economic Development Conference, ADB/HKUST (scheduled) · Nordic Conference in Development Economics, Linnaeus (scheduled) · NOVAFRICA PhD Workshop, NOVA SBE (scheduled)
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="paper" data-paper>
+      <div class="paper-head">
+        <h3>Islamic Institutions and the Female Marriage Market</h3>
+        <div class="paper-coauthors">Solo-authored</div>
+        <div class="paper-meta">
+          <span class="chip">Development</span>
+          <span class="chip">Gender</span>
+          <span class="chip">Institutions</span>
+          <span class="chip">Indonesia</span>
+        </div>
+        <button class="toggle"><span class="arrow">›</span> Read abstract</button>
+      </div>
+      <div class="paper-right">
+        <div class="abstract">
+          This study explores the impact of Islamic institutions on female marriage market outcomes in Indonesia, using the natural experiment created by the 1960 Basic Agrarian Law. The law's attempt to expropriate land, with exemptions for Islamic charitable trusts (waqf), led to an increase in waqf resources, strengthening grassroots Islamic institutions. Employing a difference-in-discontinuity design, I find that stronger Islamic institutions delay the female age of marriage, increase the bride price, and promote positive assortative matching. Contrary to common beliefs that Islam hinders gender equality, these institutions appear to enhance marriage market efficiency and support women's empowerment. The findings suggest that community-led Islamic institutions could play a crucial role in delaying marriage age and improving educational outcomes for women.
+          <div class="presentations">
+            <strong>Presentations</strong>
+            Misum Affiliate Conference (2023) · ASWEDE Conference (2023)
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="paper" data-paper>
+      <div class="paper-head">
+        <h3>Missing Institutions: Conflict, Disaster, and Widow Welfare</h3>
+        <div class="paper-coauthors">Solo-authored · <em>Early stage</em></div>
+        <div class="paper-meta">
+          <span class="chip">Development</span>
+          <span class="chip">Conflict</span>
+          <span class="chip">Gender</span>
+        </div>
+      </div>
+      <div class="paper-right"></div>
+    </article>
+  </div>
+
+  <!-- PUBLICATION -->
+  <div class="paper-group">
+    <div class="group-title">Publication <span class="count">iii.</span></div>
+
+    <article class="paper" data-paper>
+      <div class="paper-head">
+        <h3>The bidirectional temporal relationship between parenting stress and child maltreatment</h3>
+        <div class="paper-coauthors">
+          Qing Han, Rosanne Jocson, Ivo Kunovski, Marija Raleva, Rumaya Juhari, Kufre Okop, Annathea Oppler, Katherine Wilson, Tanja Cirovic, Hlengiwe Sacolo Gwebu, Liane Alampay, Stephanie Eagling-Peche, Francisco Calderon, Inge Vallance, Yuanling Chen, Jamie Lachman, <strong>and F. N. Muharam</strong>
+        </div>
+        <div class="paper-meta">
+          <span class="chip accent">Published</span>
+          <span class="chip">Cross-lagged</span>
+          <span class="chip">Psychology &amp; Policy</span>
+        </div>
+        <div class="venue">Journal of Affective Disorders <span class="year">· 2024</span></div>
+        <div style="margin-top:10px;"><a href="https://doi.org/10.1016/j.jad.2024.03.063" target="_blank" rel="noopener" style="font-family:var(--sans); font-size:13px;">doi.org/10.1016/j.jad.2024.03.063 →</a></div>
+        <button class="toggle"><span class="arrow">›</span> Read abstract</button>
+      </div>
+      <div class="paper-right">
+        <div class="abstract">
+          <p><em>Background.</em> Parenting stress has long been proposed as a major risk factor for child maltreatment. However, there is a lack of evidence from existing studies on the temporal sequence to establish a causal relationship. This study aims to examine bidirectional temporal relationships between parenting stress and child maltreatment.</p>
+          <p><em>Methods.</em> Longitudinal data from two different sources were analysed: a pre-post study of an online parenting programme conducted across six countries — the ePLH Evaluation Study, and a prospective cohort study in the United States — LONGSCAN. A cross-lagged panel model on parenting stress and child maltreatment was used in each dataset.</p>
+          <p><em>Results.</em> Based on repeatedly measured data of 484 caregivers in the ePLH study across five time points (every two weeks), we found that parenting stress at an earlier time point predicted later child maltreatment (IRR = 1.14, 95% CI: 1.10, 1.18). In addition, the occurrence of child maltreatment was associated with higher subsequent short-term parenting stress (IRR = 1.04, 95% CI: 1.01, 1.08) and thus could form a vicious circle. In the LONGSCAN analysis with 772 caregivers followed from child age 6 to 16, we also found parenting stress at an earlier time point predicted later child maltreatment (β = 0.11, 95% CI: 0.01, 0.20), but did not observe an association between child maltreatment and subsequent long-term parenting stress.</p>
+          <p><em>Limitations.</em> Potential information bias on the measurements.</p>
+          <p style="margin-bottom:0;"><em>Conclusions.</em> This study provides evidence for a bidirectional temporal relationship between parenting stress and child maltreatment, which should be considered in parenting intervention programmes.</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- CV -->
+<section id="cv">
+  <div class="section-label">Curriculum Vitae</div>
+  <div class="cv-grid">
+    <div>
+      <div class="timeline">
+        <div class="t-item current">
+          <div class="t-year">Jan — Jun 2026</div>
+          <div class="t-title">Visiting Research Student</div>
+          <div class="t-sub">Vancouver School of Economics, University of British Columbia</div>
+        </div>
+        <div class="t-item">
+          <div class="t-year">2022 — Present</div>
+          <div class="t-title">PhD in Economics</div>
+          <div class="t-sub">Stockholm School of Economics · Advised field: Development</div>
+        </div>
+        <div class="t-item">
+          <div class="t-year">2022 — Present</div>
+          <div class="t-title">Affiliated Researcher</div>
+          <div class="t-sub">House of Sustainable Society (formerly Misum), SSE</div>
+        </div>
+        <div class="t-item">
+          <div class="t-year">Prior</div>
+          <div class="t-title">Research &amp; Graduate Training</div>
+          <div class="t-sub">Applied microeconomics, causal inference, panel methods</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-right">
+      <div class="download-card">
+        <div class="label">Academic CV</div>
+        <div style="font-family:var(--serif); font-size:22px; line-height:1.3;">Full curriculum vitae with coursework, teaching, and references.</div>
+        <a class="dl-btn plain" href="https://drive.google.com/file/d/1BYeZ6iW90nRq8k89SafGb3eJQIkbOZIq/view?usp=drive_link" target="_blank" rel="noopener">
+          <span>Download PDF</span><span>↓</span>
+        </a>
+      </div>
+
+      <div class="facts">
+        <div class="fact-row"><div class="k">Last updated</div><div>April 2026</div></div>
+        <div class="fact-row"><div class="k">Languages</div><div>English, Indonesian, Swedish (basic)</div></div>
+        <div class="fact-row"><div class="k">Software</div><div>Stata · R · Python · LaTeX</div></div>
+        <div class="fact-row"><div class="k">References</div><div>Available in full CV</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="border-top:none; padding-bottom:0;">
+  <div class="footer-contact">
+    <div>
+      <div class="section-label">Contact</div>
+      <h2>Get in<br>touch.</h2>
+      <a class="email" href="mailto:fadhilnadhif.muharam@hhs.se">fadhilnadhif.muharam@hhs.se</a>
+    </div>
+    <div class="socials">
+      <a href="https://linkedin.com/in/fadhilnadhif" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://twitter.com/fadhilnadhif" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://www.hhs.se/en/persons/m/nadhif-muharam-fadhil/" target="_blank" rel="noopener">SSE Page</a>
+    </div>
+  </div>
+  <div class="colophon">
+    <div>© 2026 Fadhil Nadhif Muharam</div>
+    <div>Typeset in Source Serif 4 &amp; Inter</div>
+  </div>
+</section>
+
+</main>
+
+<!-- TWEAKS -->
+<div id="tweaks">
+  <h4>Tweaks <span style="font-family:var(--mono); font-size:10px; color:var(--ink-mute); letter-spacing:0;">v1</span></h4>
+  <div class="row">
+    <label>Accent</label>
+    <div class="swatches" id="sw-accent"></div>
+  </div>
+  <div class="row">
+    <label>Paper tone</label>
+    <div class="pills" id="sw-tone">
+      <button class="pill" data-tone="warm">Warm</button>
+      <button class="pill" data-tone="cool">Cool</button>
+      <button class="pill" data-tone="mono">Mono</button>
+    </div>
+  </div>
+  <div class="row">
+    <label>Density</label>
+    <div class="pills" id="sw-density">
+      <button class="pill" data-density="comfortable">Comfortable</button>
+      <button class="pill" data-density="compact">Compact</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---------- Abstract toggle ----------
+  document.querySelectorAll('[data-paper]').forEach(p => {
+    const btn = p.querySelector('.toggle');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      p.classList.toggle('open');
+      btn.firstElementChild.nextSibling.textContent = p.classList.contains('open') ? ' Hide abstract' : ' Read abstract';
+    });
+  });
+
+  // ---------- Scrollspy ----------
+  const navLinks = document.querySelectorAll('.nav-links a[data-link]');
+  const sections = [...document.querySelectorAll('section[id]')];
+  const onScroll = () => {
+    const y = window.scrollY + 120;
+    let current = sections[0].id;
+    for (const s of sections) { if (s.offsetTop <= y) current = s.id; }
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---------- TWEAKS ----------
+  const TWEAKS = /*EDITMODE-BEGIN*/{
+    "accent": "burgundy",
+    "tone": "warm",
+    "density": "comfortable"
+  }/*EDITMODE-END*/;
+
+  const ACCENTS = {
+    burgundy: { c: 'oklch(0.45 0.12 25)',  soft: 'oklch(0.45 0.12 25 / 0.08)' },
+    forest:   { c: 'oklch(0.42 0.09 155)', soft: 'oklch(0.42 0.09 155 / 0.08)' },
+    indigo:   { c: 'oklch(0.42 0.11 265)', soft: 'oklch(0.42 0.11 265 / 0.08)' },
+    ochre:    { c: 'oklch(0.55 0.13 70)',  soft: 'oklch(0.55 0.13 70 / 0.10)' },
+    ink:      { c: 'oklch(0.28 0.02 260)', soft: 'oklch(0.28 0.02 260 / 0.08)' },
+  };
+  const TONES = {
+    warm: { bg: '#f6f2ea', soft: '#efe9dd', paper: '#fbf8f1', rule: '#d9d1bf', ruleSoft: '#e6dfce' },
+    cool: { bg: '#eef1f4', soft: '#e4e8ec', paper: '#f7f9fb', rule: '#ccd3da', ruleSoft: '#dde2e8' },
+    mono: { bg: '#f2f2f0', soft: '#e7e7e4', paper: '#fafaf8', rule: '#d4d4d1', ruleSoft: '#e3e3df' },
+  };
+
+  function applyTweaks() {
+    const a = ACCENTS[TWEAKS.accent] || ACCENTS.burgundy;
+    const t = TONES[TWEAKS.tone] || TONES.warm;
+    const r = document.documentElement.style;
+    r.setProperty('--accent', a.c);
+    r.setProperty('--accent-soft', a.soft);
+    r.setProperty('--bg', t.bg);
+    r.setProperty('--bg-soft', t.soft);
+    r.setProperty('--paper', t.paper);
+    r.setProperty('--rule', t.rule);
+    r.setProperty('--rule-soft', t.ruleSoft);
+
+    if (TWEAKS.density === 'compact') {
+      document.body.style.fontSize = '16px';
+      document.querySelectorAll('section').forEach(s => s.style.padding = '56px 0');
+    } else {
+      document.body.style.fontSize = '';
+      document.querySelectorAll('section').forEach(s => s.style.padding = '');
+    }
+
+    // Update UI state
+    document.querySelectorAll('#sw-accent .sw').forEach(el => el.classList.toggle('on', el.dataset.accent === TWEAKS.accent));
+    document.querySelectorAll('#sw-tone .pill').forEach(el => el.classList.toggle('on', el.dataset.tone === TWEAKS.tone));
+    document.querySelectorAll('#sw-density .pill').forEach(el => el.classList.toggle('on', el.dataset.density === TWEAKS.density));
+  }
+
+  // Build accent swatches
+  const swWrap = document.getElementById('sw-accent');
+  Object.entries(ACCENTS).forEach(([name, v]) => {
+    const b = document.createElement('button');
+    b.className = 'sw';
+    b.dataset.accent = name;
+    b.style.background = v.c;
+    b.title = name;
+    b.addEventListener('click', () => { TWEAKS.accent = name; applyTweaks(); persist(); });
+    swWrap.appendChild(b);
+  });
+  document.querySelectorAll('#sw-tone .pill').forEach(el => el.addEventListener('click', () => { TWEAKS.tone = el.dataset.tone; applyTweaks(); persist(); }));
+  document.querySelectorAll('#sw-density .pill').forEach(el => el.addEventListener('click', () => { TWEAKS.density = el.dataset.density; applyTweaks(); persist(); }));
+
+  function persist() {
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { ...TWEAKS } }, '*');
+  }
+
+  applyTweaks();
+
+  // ---------- Edit mode handshake ----------
+  window.addEventListener('message', (e) => {
+    const d = e.data || {};
+    if (d.type === '__activate_edit_mode') document.getElementById('tweaks').classList.add('open');
+    if (d.type === '__deactivate_edit_mode') document.getElementById('tweaks').classList.remove('open');
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+</script>
+
+</body>
+</html>
